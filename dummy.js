@@ -158,17 +158,13 @@ function populateBoard() {
     let maxNum = 0;
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
-            
             board = setToZero(board, i, j);
 
-            // console.log('stepsBack', stepsBack);
             let currentSteps = getStepsForward(board, i, j);
             if (currentSteps > maxNum) {
                 maxNum = currentSteps;
                 stepsBack = 0;
             }
-
-            // console.log('maxNum', maxNum);
 
             let avail = getAvail(board, i, j);
             let randomAvail = avail[Math.floor(Math.random() * avail.length)];
@@ -177,30 +173,30 @@ function populateBoard() {
                 board[i][j] = randomAvail;
             } else {
                 stepsBack++;
-                if (j - stepsBack < 0) {
+                if ((j - stepsBack) < -1) {
                     i--;
-                    j = board[i].length;
+                    j = 0;
+                    stepsBack = 0;
                 }
                 else {
                     j = j - stepsBack;
                 }
             }
-            // console.log('board' + '\n', board + '\n');
+            // console.log('board' + '\n', board, '\n');
 
         }
 
     }
-    // console.log('board' + '\n', board + '\n');
     return board;
 }
 
 console.time();
 
-// for (let i = 0; i < 100; i++) {
-//     console.log(i);
-//     console.log(populateBoard());
-// }
+for (let i = 0; i < 100; i++) {
+    console.log(i);
+    console.log(populateBoard());
+}
 
-console.log(populateBoard());
+// console.log(populateBoard());
 
 console.timeEnd();
