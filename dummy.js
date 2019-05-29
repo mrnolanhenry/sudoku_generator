@@ -1,26 +1,3 @@
-
-function popBoard() {
-    let length = 9;
-
-    let board = [];
-
-    for (let i = 0; i < length; i++) {
-        let array2 = [];
-        for (let j = 0; j < length; j++) {
-            let colArray = getColArray(board, j);
-            do {
-                var randomNum = Math.ceil(Math.random() * length);
-            } while (colArray.includes(randomNum) || array2.includes(randomNum));
-            array2.push(randomNum);
-        }
-        board.push(array2);
-    }
-    return board;
-}
-
-// console.log(popBoard());
-
-
 function createEmptyBoard() {
     let length = 9;
     let array1 = [];
@@ -35,57 +12,30 @@ function createEmptyBoard() {
     return array1;
 }
 
-// console.log(createEmptyBoard());
-
-let genericBoard = [
-    [1, 8, 7, 3, 6, 9, 5, 4, 2],
-    [7, 8, 4, 1, 5, 2, 3, 9, 6],
-    [1, 0, 7, 3, 2, 5, 4, 8, 6],
-    [6, 4, 9, 3, 2, 1, 8, 7, 5],
-    [6, 2, 7, 9, 3, 4, 5, 1, 8],
-    [7, 6, 8, 4, 1, 3, 5, 2, 9],
-    [6, 5, 4, 9, 8, 1, 7, 2, 3],
-    [4, 6, 3, 8, 2, 1, 9, 5, 7],
-    [3, 8, 1, 4, 7, 9, 6, 5, 2]
-];
-
-// let genericColumn = getColArray(genericBoard, 1)
-// let genericRow = genericBoard[2];
-
-// console.log(genericColumn);
-// console.log(genericRow);
-
-// for (let i= 1; i < 10; i++) {
-//     let bool = isValid(i,genericColumn,genericRow);
-//     // console.log('i',i,genericColumn.includes(i));
-//     console.log('i',i,bool)
-// }
-
-// for (let i= 0; i < 9; i++) {
-//     for (let j= 0; j < 9; j++) {
-//     let genericQuadrant = getQuadrantArray(genericBoard, j, i);
-//     console.log(genericQuadrant);
-//     }
-// }
-
-// console.log('')
-// console.log(genericBoard);
-
-function getColArray(array, colNum) {
-    let colArray = [];
-    for (let i = 0; i < array.length; i++) {
-        colArray.push(array[i][colNum]);
+function getColArray(array, rowNum, colNum) {
+    let newArray = [];
+    for (let i = 0; i <= rowNum; i++) {
+        newArray.push(array[i][colNum]);
     }
-    return colArray;
+    console.log('rowNum', rowNum, 'newArray', newArray);
+    return newArray;
 }
 
-function isValid(number, rowArray, colArray) {
-    if (rowArray.includes(number) || colArray.includes(number)) {
-        return false;
+function getRowArray(array, rowNum, colNum) {
+    let newArray = [];
+    for (let i = 0; i <= colNum; i++) {
+        newArray.push(array[rowNum][i])
     }
-    else {
-        return true;
+    console.log('array[rowNum]', array[rowNum], 'colNum', colNum, 'newArray', newArray);
+    return newArray;
+}
+
+function digitArray(maxNum) {
+    let array = [];
+    for (let i = 0; i < maxNum; i++) {
+        array.push(i + 1);
     }
+    return array;
 }
 
 function getQuadrantArray(array, rowNum, colNum) {
@@ -164,35 +114,50 @@ function getQuadrantArray(array, rowNum, colNum) {
     return quadrantArray;
 }
 
+function getTakenDigits(colArray, rowArray, quadrantArray) {
+    return new Set(colArray.concat(rowArray).concat(quadrantArray));
+}
+
+function getAvailDigits(digitsArray, takenSet) {
+    let availArray = [];
+    digitsArray.forEach(element => {
+        if (!takenSet.has(element)) {
+            availArray.push(element);
+        }
+    })
+    return availArray;
+}
+
+
+
+
 function populateBoard() {
     let board = createEmptyBoard();
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
-            let colArray = getColArray(board, j);
-            let quadrantArray = getQuadrantArray(board,i,j);
-            // console.log('i', i, 'j', j);
-            // console.log(colArray)
-            let rowArray = board[i];
-            do {
-                var randomNum = Math.ceil(Math.random() * board.length);
-                // console.log(i, 'i', i, 'j', j);
-                // console.log('rowArray includes ' + randomNum, rowArray.includes(randomNum));
-                // console.log('rowArray',rowArray);
-                // console.log('colArray includes ' + randomNum, colArray.includes(randomNum));
-                // console.log('colArray', colArray);
-                // console.log('');
-                // console.log(!isValid(randomNum, rowArray, colArray));
+            let colArray = getColArray(board, i, j);
+            let rowArray = getRowArray(board, i, j);
+            let quadrantArray = getQuadrantArray(board, i, j);
+            let taken = getTakenDigits(colArray, rowArray, quadrantArray);
 
-            } while (colArray.includes(randomNum) || rowArray.includes(randomNum) || quadrantArray.includes(randomNum));
-            // console.log('colArray', colArray);
-            // console.log('rowArray', rowArray);
-            // console.log('randomNum', randomNum);
-            board[i][j] = randomNum;
+            let digits = digitArray(9);
+            let avail = getAvailDigits(digits, taken);
+
+            console.log('avail', avail);
+
+            // console.log('colArray', colArray, 'rowArray', rowArray, 'quadrantArray', quadrantArray);
+            // console.log('avail', avail);
+
+            let randomAvail = avail[Math.floor(Math.random() * avail.length)];
+
+            // console.log('randomAvail', randomAvail);
+            board[i][j] = randomAvail;
             console.log('board' + '\n', board);
             console.log('')
         }
-    }
-    return board;
+    
+}
+return board;
 }
 
 console.log(populateBoard());
