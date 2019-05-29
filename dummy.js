@@ -17,16 +17,16 @@ function getColArray(array, rowNum, colNum) {
     for (let i = 0; i <= rowNum; i++) {
         newArray.push(array[i][colNum]);
     }
-    console.log('rowNum', rowNum, 'newArray', newArray);
+    // console.log('rowNum', rowNum, 'newArray', newArray);
     return newArray;
 }
 
 function getRowArray(array, rowNum, colNum) {
     let newArray = [];
-    for (let i = 0; i <= colNum; i++) {
-        newArray.push(array[rowNum][i])
+    for (let j = 0; j <= colNum; j++) {
+        newArray.push(array[rowNum][j])
     }
-    console.log('array[rowNum]', array[rowNum], 'colNum', colNum, 'newArray', newArray);
+    // console.log('array[rowNum]', array[rowNum], 'colNum', colNum, 'newArray', newArray);
     return newArray;
 }
 
@@ -128,36 +128,79 @@ function getAvailDigits(digitsArray, takenSet) {
     return availArray;
 }
 
+function getAvail(board, i, j) {
+    let colArray = getColArray(board, i, j);
+    let rowArray = getRowArray(board, i, j);
+    let quadrantArray = getQuadrantArray(board, i, j);
+    let taken = getTakenDigits(colArray, rowArray, quadrantArray);
+    let digits = digitArray(9);
+    return getAvailDigits(digits, taken);
+}
 
+function getStepsForward(board, i, j) {
+    return (board[0].length * (i)) + j;
+}
 
+function setToZero(board, rowNum, colNum) {
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[i].length; j++) {
+            if (rowNum <= i && colNum <= j) {
+                board[i][j] = 0;
+            }
+        }
+    }
+    return board;
+}
 
 function populateBoard() {
     let board = createEmptyBoard();
+    let stepsBack = 0;
+    let maxNum = 0;
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
-            let colArray = getColArray(board, i, j);
-            let rowArray = getRowArray(board, i, j);
-            let quadrantArray = getQuadrantArray(board, i, j);
-            let taken = getTakenDigits(colArray, rowArray, quadrantArray);
+            
+            board = setToZero(board, i, j);
 
-            let digits = digitArray(9);
-            let avail = getAvailDigits(digits, taken);
+            // console.log('stepsBack', stepsBack);
+            let currentSteps = getStepsForward(board, i, j);
+            if (currentSteps > maxNum) {
+                maxNum = currentSteps;
+                stepsBack = 0;
+            }
 
-            console.log('avail', avail);
+            // console.log('maxNum', maxNum);
 
-            // console.log('colArray', colArray, 'rowArray', rowArray, 'quadrantArray', quadrantArray);
-            // console.log('avail', avail);
-
+            let avail = getAvail(board, i, j);
             let randomAvail = avail[Math.floor(Math.random() * avail.length)];
 
-            // console.log('randomAvail', randomAvail);
-            board[i][j] = randomAvail;
-            console.log('board' + '\n', board);
-            console.log('')
+            if (randomAvail) {
+                board[i][j] = randomAvail;
+            } else {
+                stepsBack++;
+                if (j - stepsBack < 0) {
+                    i--;
+                    j = board[i].length;
+                }
+                else {
+                    j = j - stepsBack;
+                }
+            }
+            // console.log('board' + '\n', board + '\n');
+
         }
-    
-}
-return board;
+
+    }
+    // console.log('board' + '\n', board + '\n');
+    return board;
 }
 
+console.time();
+
+// for (let i = 0; i < 100; i++) {
+//     console.log(i);
+//     console.log(populateBoard());
+// }
+
 console.log(populateBoard());
+
+console.timeEnd();
