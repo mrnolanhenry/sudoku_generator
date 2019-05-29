@@ -17,7 +17,6 @@ function getColArray(array, rowNum, colNum) {
     for (let i = 0; i <= rowNum; i++) {
         newArray.push(array[i][colNum]);
     }
-    // console.log('rowNum', rowNum, 'newArray', newArray);
     return newArray;
 }
 
@@ -26,7 +25,6 @@ function getRowArray(array, rowNum, colNum) {
     for (let j = 0; j <= colNum; j++) {
         newArray.push(array[rowNum][j])
     }
-    // console.log('array[rowNum]', array[rowNum], 'colNum', colNum, 'newArray', newArray);
     return newArray;
 }
 
@@ -38,84 +36,80 @@ function digitArray(maxNum) {
     return array;
 }
 
-function getQuadrantArray(array, rowNum, colNum) {
-    let quadrantArray = [];
-    let rowR = rowNum % 3;
-    let colR = colNum % 3;
-    if (colR === 0) {
-        if (rowR === 0) {
-            // top-left
-            // console.log('top-left')
-            for (let i = 0; i < 3; i++) {
-                quadrantArray.push(array[rowNum + i][colNum], array[rowNum + i][colNum + 1], array[rowNum + i][colNum + 2]);
+function getSquareArray(board, rowNum, colNum) {
+    let array = [];
+    let rowMod = rowNum % 3;
+    let colMod = colNum % 3;
+    switch (colMod) {
+        case 0: {
+            switch (rowMod) {
+                case 0: {
+                    // top-left
+                    break;
+                }
+                case 1: {
+                    // middle-left
+                    array.push(board[rowNum - 1][colNum], board[rowNum - 1][colNum + 1], board[rowNum - 1][colNum + 2]);
+                    break;
+                }
+                default: {
+                    // bottom-left
+                    for (let i = 0; i < 2; i++) {
+                        array.push(board[rowNum + i - 2][colNum], board[rowNum + i - 2][colNum + 1], board[rowNum + i - 2][colNum + 2]);
+                    }
+                }
             }
+            break;
         }
-        else if (rowR === 1) {
-            // middle-left
-            // console.log('middle-left')
-            for (let i = 0; i < 3; i++) {
-                quadrantArray.push(array[rowNum + i - 1][colNum], array[rowNum + i - 1][colNum + 1], array[rowNum + i - 1][colNum + 2]);
+        case 1: {
+            switch (rowMod) {
+                case 0: {
+                    // top-middle
+                    array.push(board[rowNum][colNum - 1]);
+                    break;
+                }
+                case 1: {
+                    // middle-middle
+                    array.push(board[rowNum - 1][colNum - 1], board[rowNum - 1][colNum], board[rowNum - 1][colNum + 1]);
+                    array.push(board[rowNum][colNum - 1]);
+                    break;
+                }
+                default: {
+                    // bottom-middle
+                    array.push(board[rowNum - 2][colNum - 1], board[rowNum - 2][colNum], board[rowNum - 2][colNum + 1]);
+                    array.push(board[rowNum - 1][colNum - 1], board[rowNum - 1][colNum], board[rowNum - 1][colNum + 1]);
+                    array.push(board[rowNum][colNum - 1]);
+                }
             }
+            break;
         }
-        else {
-            // bottom-left
-            // console.log('bottom-left')
-            for (let i = 0; i < 3; i++) {
-                quadrantArray.push(array[rowNum + i - 2][colNum], array[rowNum + i - 2][colNum + 1], array[rowNum + i - 2][colNum + 2]);
-            }
-        }
-    }
-    else if (colR === 1) {
-        if (rowR === 0) {
-            // top-middle
-            // console.log('top-middle')
-            for (let i = 0; i < 3; i++) {
-                quadrantArray.push(array[rowNum + i][colNum - 1], array[rowNum + i][colNum], array[rowNum + i][colNum + 1]);
-            }
-        }
-        else if (rowR === 1) {
-            // middle-middle
-            // console.log('middle-middle')
-            for (let i = 0; i < 3; i++) {
-                quadrantArray.push(array[rowNum + i - 1][colNum - 1], array[rowNum + i - 1][colNum], array[rowNum + i - 1][colNum + 1]);
-            }
-        }
-        else {
-            // bottom-middle
-            // console.log('bottom-middle')
-            for (let i = 0; i < 3; i++) {
-                quadrantArray.push(array[rowNum + i - 2][colNum - 1], array[rowNum + i - 2][colNum], array[rowNum + i - 2][colNum + 1]);
-            }
-        }
-    }
-    else {
-        if (rowR === 0) {
-            // top-middle
-            // console.log('top-right')
-            for (let i = 0; i < 3; i++) {
-                quadrantArray.push(array[rowNum + i][colNum - 2], array[rowNum + i][colNum - 1], array[rowNum + i][colNum]);
-            }
-        }
-        else if (rowR === 1) {
-            // middle-right
-            // console.log('middle-right')
-            for (let i = 0; i < 3; i++) {
-                quadrantArray.push(array[rowNum + i - 1][colNum - 2], array[rowNum + i - 1][colNum - 1], array[rowNum + i - 1][colNum]);
-            }
-        }
-        else {
-            // bottom-right
-            // console.log('bottom-right')
-            for (let i = 0; i < 3; i++) {
-                quadrantArray.push(array[rowNum + i - 2][colNum - 2], array[rowNum + i - 2][colNum - 1], array[rowNum + i - 2][colNum]);
+        default: {
+            switch (rowMod) {
+                case 0: {
+                    // top-right
+                    array.push(board[rowNum][colNum - 2], board[rowNum][colNum - 1]);
+                    break;
+                }
+                case 1: {
+                    // middle-right
+                    array.push(board[rowNum - 1][colNum - 2], board[rowNum - 1][colNum - 1], board[rowNum - 1][colNum]);
+                    array.push(board[rowNum][colNum - 2], board[rowNum][colNum - 1]);
+                    break;
+                }
+                default: {
+                    // bottom-right
+                    array.push(board[rowNum - 2][colNum - 2], board[rowNum - 2][colNum - 1], board[rowNum - 2][colNum]);
+                    array.push(board[rowNum - 1][colNum - 2], board[rowNum - 1][colNum - 1], board[rowNum - 1][colNum]);
+                    array.push(board[rowNum][colNum - 2], board[rowNum][colNum - 1]);
+                }
             }
         }
     }
-    return quadrantArray;
+    return array;
 }
 
-function getTakenDigits(colArray, rowArray, quadrantArray) {
-    return new Set(colArray.concat(rowArray).concat(quadrantArray));
+function getTakenDigits(colArray, rowArray, squareArray) {
+    return new Set(colArray.concat(rowArray).concat(squareArray));
 }
 
 function getAvailDigits(digitsArray, takenSet) {
@@ -131,8 +125,8 @@ function getAvailDigits(digitsArray, takenSet) {
 function getAvail(board, i, j) {
     let colArray = getColArray(board, i, j);
     let rowArray = getRowArray(board, i, j);
-    let quadrantArray = getQuadrantArray(board, i, j);
-    let taken = getTakenDigits(colArray, rowArray, quadrantArray);
+    let squareArray = getSquareArray(board, i, j);
+    let taken = getTakenDigits(colArray, rowArray, squareArray);
     let digits = digitArray(9);
     return getAvailDigits(digits, taken);
 }
@@ -141,24 +135,13 @@ function getStepsForward(board, i, j) {
     return (board[0].length * (i)) + j;
 }
 
-function setToZero(board, rowNum, colNum) {
-    for (let i = 0; i < board.length; i++) {
-        for (let j = 0; j < board[i].length; j++) {
-            if (rowNum <= i && colNum <= j) {
-                board[i][j] = 0;
-            }
-        }
-    }
-    return board;
-}
-
 function populateBoard() {
     let board = createEmptyBoard();
     let stepsBack = 0;
     let maxNum = 0;
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
-            board = setToZero(board, i, j);
+            board[i][j] = 0;
 
             let currentSteps = getStepsForward(board, i, j);
             if (currentSteps > maxNum) {
@@ -183,9 +166,7 @@ function populateBoard() {
                 }
             }
             // console.log('board' + '\n', board, '\n');
-
         }
-
     }
     return board;
 }
@@ -193,10 +174,9 @@ function populateBoard() {
 console.time();
 
 for (let i = 0; i < 100; i++) {
-    console.log(i);
-    console.log(populateBoard());
+    // console.log(i);
+    // console.log(populateBoard());
+    populateBoard()
 }
-
-// console.log(populateBoard());
 
 console.timeEnd();
