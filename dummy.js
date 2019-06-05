@@ -135,7 +135,7 @@ function getStepsForward(board, i, j) {
     return (board[0].length * (i)) + j;
 }
 
-export function populateBoard() {
+function populateBoard() {
     let board = createEmptyBoard();
     let stepsBack = 0;
     let maxNum = 0;
