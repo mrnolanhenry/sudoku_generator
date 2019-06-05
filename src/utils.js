@@ -165,7 +165,6 @@ export function populateBoard() {
                     j = j - stepsBack;
                 }
             }
-            // console.log('board' + '\n', board, '\n');
         }
     }
     return board;
@@ -180,3 +179,20 @@ export function populateBoard() {
 // }
 
 // console.timeEnd();
+
+function createBoardObj() {
+
+}
+
+function getRevealNum (difficulty) {
+    switch (difficulty) {
+        case "easy":
+            return 20;
+        case "medium":
+            return 15;
+        case "hard":
+            return 10;
+        default:
+            return 15;
+    }
+}

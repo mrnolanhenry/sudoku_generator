@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import "./Row.css";
+import "./Col.css";
 
-class Row extends Component {
+class Col extends Component {
 
 
     render() {
 
         return (
-            <div className={`row ${(this.props.center) ? "row-center" : ""}`}>
+            <div className={`col ${(this.props.center) ? "col-center" : ""}`}>
                 {this.props.children}
             </div>
         )
     }
 }
 
-export default Row;
+export default Col;
