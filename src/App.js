@@ -8,12 +8,12 @@ import Header from "./components/Header";
 
 class App extends React.Component {
   state = {
-    board: utils.populateBoard()
+    board: utils.populateBoardArray()
   }
 
   componentDidMount = () => {
-    let newBoard = utils.populateBoard();
-    this.setState({ board: newBoard })
+    // let newBoard = utils.populateBoardArray();
+    // this.setState({ board: newBoard })
   }
   
 

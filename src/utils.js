@@ -1,4 +1,4 @@
-function createEmptyBoard() {
+function createEmptyBoardArray() {
     let length = 9;
     let array1 = [];
 
@@ -135,8 +135,8 @@ function getStepsForward(board, i, j) {
     return (board[0].length * (i)) + j;
 }
 
-export function populateBoard() {
-    let board = createEmptyBoard();
+export function populateBoardArray() {
+    let board = createEmptyBoardArray();
     let stepsBack = 0;
     let maxNum = 0;
     for (let i = 0; i < board.length; i++) {
@@ -174,13 +174,13 @@ export function populateBoard() {
 
 // for (let i = 0; i < 100; i++) {
 //     // console.log(i);
-//     // console.log(populateBoard());
-//     populateBoard()
+//     // console.log(populateBoardArray());
+//     populateBoardArray()
 // }
 
 // console.timeEnd();
 
-function getRevealNum (difficulty) {
+function getRevealNum(difficulty) {
     switch (difficulty) {
         case "easy":
             return 20;
@@ -193,21 +193,32 @@ function getRevealNum (difficulty) {
     }
 }
 
-function createBoardObjArray(boardArray, difficulty) {
-    let boardObjArray = [];
+export function createBoard(boardArray, difficulty) {
+    let board = [];
     let revealNum = getRevealNum(difficulty);
     boardArray.forEach(row => {
         let rowObjArray = [];
         row.forEach(element => {
             let obj = {
                 number: element,
-                revealed: Math.floor(Math.random() * boardArray.length * boardArray.length) < revealNum
+                revealed: Math.floor(Math.random() * boardArray.length * boardArray.length) <= revealNum
             }
             rowObjArray.push(obj);
         })
-        boardObjArray.push(rowObjArray);
+        board.push(rowObjArray);
     })
-    return boardObjArray;
+    return board;
 }
 
-console.log(createBoardObjArray(populateBoard()));
+export function getRevealedOnBoard(board,boolean = true) {
+    let revealed = [];
+    for (let i = 0; i < board.length; i++) {
+        let filteredRow = board[i].filter(element => element.revealed === boolean)
+        if (filteredRow.length > 0) {
+            revealed.push(filteredRow);
+        }
+    }
+    return revealed;
+}
+
+console.log('revealed \n', getRevealedOnBoard(createBoard(populateBoardArray())));
