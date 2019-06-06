@@ -8,7 +8,9 @@ import Header from "./components/Header";
 
 class App extends React.Component {
   state = {
-    board: utils.createBoard()
+    board: utils.createBoard(),
+    correct: false,
+    difficulty: "medium"
   }
 
   // componentDidMount = () => {

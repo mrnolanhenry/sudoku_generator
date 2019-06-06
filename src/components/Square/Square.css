@@ -30,3 +30,9 @@ span.square {
 .square.left {
     border-left: 2px black solid;
 }
+
+.square:focus {
+    outline: none;
+    box-shadow: 2px 2px 2px 2px grey inset;
+    transition: .3s;
+}
