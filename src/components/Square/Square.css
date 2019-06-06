@@ -1,0 +1,29 @@
+span.square {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border: 1px black solid;
+    box-sizing: border-box;
+}
+
+span.square.top {
+    border-top: 2px black solid;
+}
+
+span.square.bottom {
+    border-bottom: 2px black solid;
+}
+
+span.square.right {
+    border-right: 2px black solid;
+}
+
+span.square.left {
+    border-left: 2px black solid;
+}
+

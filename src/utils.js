@@ -221,4 +221,4 @@ export function getRevealedOnBoard(board,boolean = true) {
     return revealed;
 }
 
-console.log('revealed \n', getRevealedOnBoard(createBoard(populateBoardArray())));
+// console.log('revealed \n', getRevealedOnBoard(createBoard(populateBoardArray())));

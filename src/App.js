@@ -23,7 +23,7 @@ class App extends React.Component {
       this.state.board.map((row, rowIndex) => {
         return <Row center key={rowIndex}>
           {row.map((square, colIndex) => {
-            return <Square key={`${rowIndex},${colIndex}`} id={`${rowIndex},${colIndex}`} number={square} />
+            return <Square rowIndex={rowIndex} colIndex={colIndex} key={`${rowIndex},${colIndex}`} id={`${rowIndex},${colIndex}`} number={square} />
           })}
         </Row>
       })
