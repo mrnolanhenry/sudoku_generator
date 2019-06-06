@@ -9,6 +9,7 @@ span.square {
     align-items: center;
     border: 1px black solid;
     box-sizing: border-box;
+    font-weight: bold;
 }
 
 span.square.top {
@@ -27,3 +28,31 @@ span.square.left {
     border-left: 2px black solid;
 }
 
+input.square {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border: 1px black solid;
+    box-sizing: border-box;
+}
+
+input.square.top {
+    border-top: 2px black solid;
+}
+
+input.square.bottom {
+    border-bottom: 2px black solid;
+}
+
+input.square.right {
+    border-right: 2px black solid;
+}
+
+input.square.left {
+    border-left: 2px black solid;
+}

@@ -25,18 +25,18 @@ class Square extends Component {
         }
     }
 
-    handleCorners(top,right,bottom,left) {
+    handleCorners(top, right, bottom, left) {
         let corners = "";
-        if(top) {
+        if (top) {
             corners += " top";
         }
-        if(right) {
+        if (right) {
             corners += " right";
         }
-        if(bottom) {
+        if (bottom) {
             corners += " bottom";
         }
-        if(left) {
+        if (left) {
             corners += " left";
         }
         return corners;
@@ -47,13 +47,22 @@ class Square extends Component {
         let right = this.handleBottomRight(this.props.colIndex)
         let bottom = this.handleBottomRight(this.props.rowIndex)
         let left = this.handleTopLeft(this.props.colIndex)
-        let corners = this.handleCorners(top,right,bottom,left);
+        let corners = this.handleCorners(top, right, bottom, left);
 
-        return (
-            <span className={`square ${corners}`} id={this.props.id}>
-                {this.props.number}
-            </span>
-        )
+        if (this.props.revealed) {
+            return (
+                <span className={`square ${corners}`} id={this.props.id}>
+                    {this.props.number}
+                </span>
+            )
+        }
+        else {
+            return (
+                <input className={`square ${corners}`} id={this.props.id} placeholder= {this.props.number}>
+                </input>
+            )
+        }
+
     }
 }
 

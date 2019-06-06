@@ -193,7 +193,8 @@ function getRevealNum(difficulty) {
     }
 }
 
-export function createBoard(boardArray, difficulty) {
+export function createBoard(difficulty) {
+    let boardArray = populateBoardArray();
     let board = [];
     let revealNum = getRevealNum(difficulty);
     boardArray.forEach(row => {

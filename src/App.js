@@ -8,13 +8,13 @@ import Header from "./components/Header";
 
 class App extends React.Component {
   state = {
-    board: utils.populateBoardArray()
+    board: utils.createBoard()
   }
 
-  componentDidMount = () => {
-    // let newBoard = utils.populateBoardArray();
-    // this.setState({ board: newBoard })
-  }
+  // componentDidMount = () => {
+  //   // let newBoard = utils.populateBoardArray();
+  //   // this.setState({ board: newBoard })
+  // }
   
 
   render() {
@@ -23,7 +23,7 @@ class App extends React.Component {
       this.state.board.map((row, rowIndex) => {
         return <Row center key={rowIndex}>
           {row.map((square, colIndex) => {
-            return <Square rowIndex={rowIndex} colIndex={colIndex} key={`${rowIndex},${colIndex}`} id={`${rowIndex},${colIndex}`} number={square} />
+            return <Square rowIndex={rowIndex} colIndex={colIndex} key={`${rowIndex},${colIndex}`} id={`${rowIndex},${colIndex}`} number={square.number} revealed={square.revealed} />
           })}
         </Row>
       })
