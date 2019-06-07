@@ -264,7 +264,7 @@ function getRevealNum(difficulty) {
         case "hard":
             return 30;
         case "expert":
-            return 26;
+            return 27;
         default:
             return 33;
     }

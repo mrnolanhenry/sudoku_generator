@@ -1,11 +1,7 @@
 .btn-next-puzzle {
     background-color: white;
     color: black;
-    border-top-color: grey;
-    border-left-color: grey;
-    border-right-color: grey;
-    border-bottom-color: grey;
-    box-shadow: 2px 2px 2px 0px grey;
+    box-shadow: 2px 4px 4px 0px grey;
     margin: 0px 10px 0px 10px;
     font-family: cursive;
 }
