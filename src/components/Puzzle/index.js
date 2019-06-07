@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-// import "./Col.css";
+import Row from "../Row"
+import "./Puzzle.css";
 
 class Puzzle extends Component {
 
@@ -8,7 +9,16 @@ class Puzzle extends Component {
         return (
             <form id="puzzle" onSubmit={this.props.onSubmit}>
                 {this.props.children}
+                <Row center padded>
+                <button
+                    className="btn-submit-puzzle"
+                    type="submit"
+                    name="action">
+                    Submit
+                </button>
+                </Row>
             </form>
+            
         )
     }
 }

@@ -49,7 +49,7 @@ class Square extends Component {
         let left = this.handleTopLeft(this.props.colIndex)
         let corners = this.handleCorners(top, right, bottom, left);
 
-        if (this.props.revealed) {
+        if (this.props.shown) {
             return (
                 <span className={`square ${corners}`} id={this.props.id}>
                     {this.props.number}
@@ -58,7 +58,7 @@ class Square extends Component {
         }
         else {
             return (
-                <input className={`square ${corners}`} id={this.props.id} placeholder={this.props.number}>
+                <input onChange={this.props.onChange} className={`square ${corners}`} id={this.props.id} rowindex={this.props.rowIndex} colindex={this.props.colIndex} placeholder={this.props.number}>
                 </input>
             )
         }

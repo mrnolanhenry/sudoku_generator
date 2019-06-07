@@ -10,15 +10,18 @@ import Puzzle from "./components/Puzzle";
 
 class App extends React.Component {
   state = {
-    board: utils.createBoard(),
+    board: [],
+    attempt: [],
     correct: false,
     difficulty: "medium"
   }
 
-  // componentDidMount = () => {
-  //   // let newBoard = utils.populateBoardArray();
-  //   // this.setState({ board: newBoard })
-  // }
+  componentDidMount = () => {
+    let newBoard = utils.createBoard()
+    this.setState({ 
+      board: newBoard,
+      attempt: utils.getShown(newBoard) })
+  }
 
   handleChange = (e) => {
     this.setState({
@@ -27,33 +30,51 @@ class App extends React.Component {
   };
 
   handleNextBoard = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    let newBoard = utils.createBoard(this.state.difficulty);
     this.setState({
-      board: utils.createBoard(this.state.difficulty)
-    });
+      board: newBoard,
+      attempt: utils.getShown(newBoard)
+    })
     var puzzleForm = document.getElementById('puzzle');
     puzzleForm.reset();
   };
 
+  handleAttempt = (e) => {
+    e.preventDefault();
+    // TODO: check if this.state.attempt is valid board
+
+  }
+
+  handleFill = (e) => {
+    let currentFill = this.state.attempt;
+    let rowIndex = e.target.getAttribute('rowindex');
+    let colIndex = e.target.getAttribute('colindex');
+    currentFill[rowIndex][colIndex] = parseInt(e.target.value);
+    console.log(currentFill)
+    this.setState({
+      attempt: currentFill
+    });
+  }
 
   render() {
-
-    const mapSquares =
-      this.state.board.map((row, rowIndex) => {
-        return <Row center key={rowIndex}>
+    var mapSquares = [];
+    if (this.state.board.length > 0) {
+      mapSquares = this.state.board.map((row, rowIndex) => {
+        return <Row center puzzle key={rowIndex}>
           {row.map((square, colIndex) => {
-            return <Square rowIndex={rowIndex} colIndex={colIndex} key={`${rowIndex},${colIndex}`} id={`${rowIndex},${colIndex}`} number={square.number} revealed={square.revealed} />
+            return <Square onChange={this.handleFill} rowIndex={rowIndex} colIndex={colIndex} key={`${rowIndex},${colIndex}`} id={`${rowIndex},${colIndex}`} number={square.number} shown={square.shown} />
           })}
         </Row>
       })
-
+    }
 
     return (
       <div className="container-fluid">
         <Header />
         <Row center>
           <Col center>
-            <Puzzle>
+            <Puzzle onSubmit={this.handleAttempt}>
               {mapSquares}
             </Puzzle>
           </Col>

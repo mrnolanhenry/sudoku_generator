@@ -170,16 +170,6 @@ export function populateBoardArray() {
     return board;
 }
 
-// console.time();
-
-// for (let i = 0; i < 100; i++) {
-//     // console.log(i);
-//     // console.log(populateBoardArray());
-//     populateBoardArray()
-// }
-
-// console.timeEnd();
-
 function getRevealNum(difficulty) {
     switch (difficulty) {
         case "easy":
@@ -202,7 +192,7 @@ export function createBoard(difficulty) {
         row.forEach(element => {
             let obj = {
                 number: element,
-                revealed: Math.floor(Math.random() * boardArray.length * boardArray.length) <= revealNum
+                shown: Math.floor(Math.random() * boardArray.length * boardArray.length) <= revealNum
             }
             rowObjArray.push(obj);
         })
@@ -211,15 +201,20 @@ export function createBoard(difficulty) {
     return board;
 }
 
-export function getRevealedOnBoard(board,boolean = true) {
-    let revealed = [];
+export function getShown(board, boolean = true) {
+    let shown = [];
     for (let i = 0; i < board.length; i++) {
-        let filteredRow = board[i].filter(element => element.revealed === boolean)
-        if (filteredRow.length > 0) {
-            revealed.push(filteredRow);
-        }
+        let shownRow = [];
+        board[i].forEach(element => {
+            if (element.shown === boolean) {
+                shownRow.push(element.number);
+                // return element.number;
+            } else {
+                shownRow.push(0);
+                // return 0;
+            }
+        })
+        shown.push(shownRow)
     }
-    return revealed;
+    return shown;
 }
-
-// console.log('revealed \n', getRevealedOnBoard(createBoard(populateBoardArray())));

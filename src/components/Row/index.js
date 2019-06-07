@@ -6,7 +6,7 @@ class Row extends Component {
     render() {
 
         return (
-            <div className={`row ${(this.props.center) ? "row-center" : ""} ${(this.props.padded) ? "row-padded" : ""}`}>
+            <div className={`row ${(this.props.center) ? "row-center" : ""} ${(this.props.padded) ? "row-padded" : ""} ${(this.props.puzzle) ? "row-puzzle" : ""} `} >
                 {this.props.children}
             </div>
         )

@@ -34,5 +34,5 @@ span.square {
 .square:focus {
     outline: none;
     box-shadow: 2px 2px 2px 2px grey inset;
-    transition: .3s;
+    transition: .2s;
 }
