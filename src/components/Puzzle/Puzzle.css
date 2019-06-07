@@ -1,0 +1,42 @@
+button {
+    background-color: white;
+    margin: 0px 10px 0px 10px;
+    font-family: cursive;
+    box-shadow: 2px 2px 2px 0px grey;
+    opacity: .6;
+    transition: .2s;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-submit-puzzle {
+    color: black;
+    border-top-color: grey;
+    border-left-color: grey;
+    border-right-color: grey;
+    border-bottom-color: grey;
+}
+
+button:focus,
+button:target,
+button:hover,
+button:active {
+    outline: none;
+}
+
+button:hover {opacity: 1}
+
+button:active {
+    box-shadow: 0 0px grey;
+    transform: translateY(2px);
+}
+
+.btn-show-solved {
+    background-color: rgb(0, 89, 255);
+    color: white;
+    border-top-color: grey;
+    border-left-color: grey;
+    border-right-color: grey;
+    border-bottom-color: grey;
+}

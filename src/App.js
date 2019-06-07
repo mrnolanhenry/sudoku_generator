@@ -5,6 +5,7 @@ import Tile from "./components/Tile";
 import Col from "./components/Col";
 import Row from "./components/Row";
 import Header from "./components/Header";
+import MessageBar from "./components/MessageBar";
 import NextPuzzle from "./components/NextPuzzle";
 import Puzzle from "./components/Puzzle";
 
@@ -13,7 +14,9 @@ class App extends React.Component {
     board: [],
     attempt: [],
     correct: false,
-    difficulty: "medium"
+    difficulty: "medium",
+    message: "",
+    count: 0
   }
 
   componentDidMount = () => {
@@ -35,6 +38,7 @@ class App extends React.Component {
     this.setState({
       board: newBoard,
       attempt: utils.getShown(newBoard),
+      message: "",
       correct: false
     })
     var puzzleForm = document.getElementById('puzzle');
@@ -44,13 +48,17 @@ class App extends React.Component {
   handleAttempt = (e) => {
     e.preventDefault();
     if (utils.isCorrect(this.state.attempt)) {
+      let prevCount = this.state.count
       this.setState({
-        correct: true
+        correct: true,
+        message: "Correct!",
+        count: prevCount + 1
       })
-      console.log('correct!')
     }
     else {
-      console.log('incorrect!')
+      this.setState({
+        message: "Try again!"
+      })
     }
   }
 
@@ -93,7 +101,8 @@ class App extends React.Component {
     return (
       <div className="container-fluid">
         <Header />
-        <Row center>
+        <MessageBar message={this.state.message} count={this.state.count} />
+        <Row center padded>
           <Col center>
             <Puzzle onSubmit={this.handleAttempt} onClick={this.showSolved}>
               {mapTiles}

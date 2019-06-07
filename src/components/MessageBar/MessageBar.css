@@ -1,0 +1,12 @@
+h5, h6 {
+    font-family: cursive;
+}
+
+.message {
+    font-style: oblique;
+    color: rgb(0, 89, 255);
+}
+
+.row {
+    min-height: 42px;
+}

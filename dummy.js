@@ -255,6 +255,8 @@ function populateBoardArray() {
 
 function getRevealNum(difficulty) {
     switch (difficulty) {
+        case "beginner":
+            return 45;
         case "easy":
             return 36;
         case "medium":

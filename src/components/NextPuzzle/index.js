@@ -12,6 +12,7 @@ class NextPuzzle extends Component {
                     name='difficulty'
                     defaultValue={this.props.difficulty}>
                     <option value="medium" disabled className="text-hide">Select difficulty</option>
+                    <option>beginner</option>
                     <option>easy</option>
                     <option>medium</option>
                     <option>hard</option>
