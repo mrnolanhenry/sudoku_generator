@@ -3,11 +3,10 @@ import "./Row.css";
 
 class Row extends Component {
 
-
     render() {
 
         return (
-            <div className={`row ${(this.props.center) ? "row-center" : ""}`}>
+            <div className={`row ${(this.props.center) ? "row-center" : ""} ${(this.props.padded) ? "row-padded" : ""}`}>
                 {this.props.children}
             </div>
         )

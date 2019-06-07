@@ -58,7 +58,7 @@ class Square extends Component {
         }
         else {
             return (
-                <input className={`square ${corners}`} id={this.props.id} placeholder= {this.props.number}>
+                <input className={`square ${corners}`} id={this.props.id} placeholder={this.props.number}>
                 </input>
             )
         }

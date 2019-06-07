@@ -3,3 +3,7 @@
     text-align: center;
     /* align-items: center; */
 }
+
+.row-padded {
+    padding-top: 10px;
+}

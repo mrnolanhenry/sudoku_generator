@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-// import "./NextButton.css";
+import "./NextPuzzle.css";
 
-class NextButton extends Component {
+class NextPuzzle extends Component {
 
     render() {
 
@@ -28,6 +28,6 @@ class NextButton extends Component {
     }
 }
 
-export default NextButton;
+export default NextPuzzle;
 
 

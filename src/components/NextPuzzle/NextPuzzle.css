@@ -1,0 +1,14 @@
+button {
+    background-color: white;
+    color: black;
+    border-top-color: grey;
+    border-left-color: grey;
+    border-right-color: black;
+    border-bottom-color: black;
+    box-shadow: 2px 2px 2px 0px grey;
+    margin: 0px 10px 0px 10px;
+}
+
+button:focus {
+    outline: none;
+}

@@ -5,7 +5,8 @@ import Square from "./components/Square";
 import Col from "./components/Col";
 import Row from "./components/Row";
 import Header from "./components/Header";
-import NextButton from "./components/NextButton";
+import NextPuzzle from "./components/NextPuzzle";
+import Puzzle from "./components/Puzzle";
 
 class App extends React.Component {
   state = {
@@ -30,6 +31,8 @@ class App extends React.Component {
     this.setState({
       board: utils.createBoard(this.state.difficulty)
     });
+    var puzzleForm = document.getElementById('puzzle');
+    puzzleForm.reset();
   };
 
 
@@ -50,12 +53,14 @@ class App extends React.Component {
         <Header />
         <Row center>
           <Col center>
-            {mapSquares}
+            <Puzzle>
+              {mapSquares}
+            </Puzzle>
           </Col>
         </Row>
-        <Row center>
+        <Row center padded>
           <Col center>
-            <NextButton onSubmit={this.handleNextBoard} onChange={this.handleChange} difficulty={this.state.difficulty} />
+            <NextPuzzle onSubmit={this.handleNextBoard} onChange={this.handleChange} difficulty={this.state.difficulty} />
           </Col>
         </Row>
 
