@@ -36,7 +36,7 @@ function digitArray(maxNum) {
     return array;
 }
 
-function getSquareArray(board, rowNum, colNum) {
+function getSquareArray(boardArray, rowNum, colNum) {
     let array = [];
     let rowMod = rowNum % 3;
     let colMod = colNum % 3;
@@ -49,13 +49,13 @@ function getSquareArray(board, rowNum, colNum) {
                 }
                 case 1: {
                     // middle-left
-                    array.push(board[rowNum - 1][colNum], board[rowNum - 1][colNum + 1], board[rowNum - 1][colNum + 2]);
+                    array.push(boardArray[rowNum - 1][colNum], boardArray[rowNum - 1][colNum + 1], boardArray[rowNum - 1][colNum + 2]);
                     break;
                 }
                 default: {
                     // bottom-left
                     for (let i = 0; i < 2; i++) {
-                        array.push(board[rowNum + i - 2][colNum], board[rowNum + i - 2][colNum + 1], board[rowNum + i - 2][colNum + 2]);
+                        array.push(boardArray[rowNum + i - 2][colNum], boardArray[rowNum + i - 2][colNum + 1], boardArray[rowNum + i - 2][colNum + 2]);
                     }
                 }
             }
@@ -65,20 +65,20 @@ function getSquareArray(board, rowNum, colNum) {
             switch (rowMod) {
                 case 0: {
                     // top-middle
-                    array.push(board[rowNum][colNum - 1]);
+                    array.push(boardArray[rowNum][colNum - 1]);
                     break;
                 }
                 case 1: {
                     // middle-middle
-                    array.push(board[rowNum - 1][colNum - 1], board[rowNum - 1][colNum], board[rowNum - 1][colNum + 1]);
-                    array.push(board[rowNum][colNum - 1]);
+                    array.push(boardArray[rowNum - 1][colNum - 1], boardArray[rowNum - 1][colNum], boardArray[rowNum - 1][colNum + 1]);
+                    array.push(boardArray[rowNum][colNum - 1]);
                     break;
                 }
                 default: {
                     // bottom-middle
-                    array.push(board[rowNum - 2][colNum - 1], board[rowNum - 2][colNum], board[rowNum - 2][colNum + 1]);
-                    array.push(board[rowNum - 1][colNum - 1], board[rowNum - 1][colNum], board[rowNum - 1][colNum + 1]);
-                    array.push(board[rowNum][colNum - 1]);
+                    array.push(boardArray[rowNum - 2][colNum - 1], boardArray[rowNum - 2][colNum], boardArray[rowNum - 2][colNum + 1]);
+                    array.push(boardArray[rowNum - 1][colNum - 1], boardArray[rowNum - 1][colNum], boardArray[rowNum - 1][colNum + 1]);
+                    array.push(boardArray[rowNum][colNum - 1]);
                 }
             }
             break;
@@ -87,20 +87,103 @@ function getSquareArray(board, rowNum, colNum) {
             switch (rowMod) {
                 case 0: {
                     // top-right
-                    array.push(board[rowNum][colNum - 2], board[rowNum][colNum - 1]);
+                    array.push(boardArray[rowNum][colNum - 2], boardArray[rowNum][colNum - 1]);
                     break;
                 }
                 case 1: {
                     // middle-right
-                    array.push(board[rowNum - 1][colNum - 2], board[rowNum - 1][colNum - 1], board[rowNum - 1][colNum]);
-                    array.push(board[rowNum][colNum - 2], board[rowNum][colNum - 1]);
+                    array.push(boardArray[rowNum - 1][colNum - 2], boardArray[rowNum - 1][colNum - 1], boardArray[rowNum - 1][colNum]);
+                    array.push(boardArray[rowNum][colNum - 2], boardArray[rowNum][colNum - 1]);
                     break;
                 }
                 default: {
                     // bottom-right
-                    array.push(board[rowNum - 2][colNum - 2], board[rowNum - 2][colNum - 1], board[rowNum - 2][colNum]);
-                    array.push(board[rowNum - 1][colNum - 2], board[rowNum - 1][colNum - 1], board[rowNum - 1][colNum]);
-                    array.push(board[rowNum][colNum - 2], board[rowNum][colNum - 1]);
+                    array.push(boardArray[rowNum - 2][colNum - 2], boardArray[rowNum - 2][colNum - 1], boardArray[rowNum - 2][colNum]);
+                    array.push(boardArray[rowNum - 1][colNum - 2], boardArray[rowNum - 1][colNum - 1], boardArray[rowNum - 1][colNum]);
+                    array.push(boardArray[rowNum][colNum - 2], boardArray[rowNum][colNum - 1]);
+                }
+            }
+        }
+    }
+    return array;
+}
+
+function getFullSquareArray(boardArray, rowNum, colNum) {
+    let array = [];
+    let rowMod = rowNum % 3;
+    let colMod = colNum % 3;
+    switch (colMod) {
+        case 0: {
+            switch (rowMod) {
+                case 0: {
+                    // top-left
+                    array.push(boardArray[rowNum][colNum], boardArray[rowNum][colNum + 1], boardArray[rowNum][colNum + 2]);
+                    array.push(boardArray[rowNum + 1][colNum], boardArray[rowNum + 1][colNum + 1], boardArray[rowNum + 1][colNum + 2]);
+                    array.push(boardArray[rowNum + 2][colNum], boardArray[rowNum + 2][colNum + 1], boardArray[rowNum + 2][colNum + 2]);
+                    break;
+                }
+                case 1: {
+                    // middle-left
+                    array.push(boardArray[rowNum - 1][colNum], boardArray[rowNum - 1][colNum + 1], boardArray[rowNum - 1][colNum + 2]);
+                    array.push(boardArray[rowNum][colNum], boardArray[rowNum][colNum + 1], boardArray[rowNum][colNum + 2]);
+                    array.push(boardArray[rowNum + 1][colNum], boardArray[rowNum + 1][colNum + 1], boardArray[rowNum + 1][colNum + 2]);
+                    break;
+                }
+                default: {
+                    // bottom-left
+                    array.push(boardArray[rowNum - 2][colNum], boardArray[rowNum - 2][colNum + 1], boardArray[rowNum - 2][colNum + 2]);
+                    array.push(boardArray[rowNum - 1][colNum], boardArray[rowNum - 1][colNum + 1], boardArray[rowNum - 1][colNum + 2]);
+                    array.push(boardArray[rowNum][colNum], boardArray[rowNum][colNum + 1], boardArray[rowNum][colNum + 2]);
+                }
+            }
+            break;
+        }
+        case 1: {
+            switch (rowMod) {
+                case 0: {
+                    // top-middle
+                    array.push(boardArray[rowNum][colNum - 1], boardArray[rowNum][colNum], boardArray[rowNum][colNum + 1]);
+                    array.push(boardArray[rowNum + 1][colNum - 1], boardArray[rowNum + 1][colNum], boardArray[rowNum + 1][colNum + 1]);
+                    array.push(boardArray[rowNum + 2][colNum - 1], boardArray[rowNum + 2][colNum], boardArray[rowNum + 2][colNum + 1]);
+                    break;
+                }
+                case 1: {
+                    // middle-middle
+                    array.push(boardArray[rowNum - 1][colNum - 1], boardArray[rowNum - 1][colNum], boardArray[rowNum - 1][colNum + 1]);
+                    array.push(boardArray[rowNum][colNum - 1], boardArray[rowNum][colNum], boardArray[rowNum][colNum + 1]);
+                    array.push(boardArray[rowNum + 1][colNum - 1], boardArray[rowNum + 1][colNum], boardArray[rowNum + 1][colNum + 1]);
+                    break;
+                }
+                default: {
+                    // bottom-middle
+                    array.push(boardArray[rowNum - 2][colNum - 1], boardArray[rowNum - 2][colNum], boardArray[rowNum - 2][colNum + 1]);
+                    array.push(boardArray[rowNum - 1][colNum - 1], boardArray[rowNum - 1][colNum], boardArray[rowNum - 1][colNum + 1]);
+                    array.push(boardArray[rowNum][colNum - 1], boardArray[rowNum][colNum], boardArray[rowNum][colNum + 1]);
+                }
+            }
+            break;
+        }
+        default: {
+            switch (rowMod) {
+                case 0: {
+                    // top-right
+                    array.push(boardArray[rowNum][colNum - 2], boardArray[rowNum][colNum - 1], boardArray[rowNum][colNum]);
+                    array.push(boardArray[rowNum + 1][colNum - 2], boardArray[rowNum + 1][colNum - 1], boardArray[rowNum + 1][colNum]);
+                    array.push(boardArray[rowNum + 2][colNum - 2], boardArray[rowNum + 2][colNum - 1], boardArray[rowNum + 2][colNum]);
+                    break;
+                }
+                case 1: {
+                    // middle-right
+                    array.push(boardArray[rowNum - 1][colNum - 2], boardArray[rowNum - 1][colNum - 1], boardArray[rowNum - 1][colNum]);
+                    array.push(boardArray[rowNum][colNum - 2], boardArray[rowNum][colNum - 1], boardArray[rowNum][colNum]);
+                    array.push(boardArray[rowNum + 1][colNum - 2], boardArray[rowNum + 1][colNum - 1], boardArray[rowNum + 1][colNum]);
+                    break;
+                }
+                default: {
+                    // bottom-right
+                    array.push(boardArray[rowNum - 2][colNum - 2], boardArray[rowNum - 2][colNum - 1], boardArray[rowNum - 2][colNum]);
+                    array.push(boardArray[rowNum - 1][colNum - 2], boardArray[rowNum - 1][colNum - 1], boardArray[rowNum - 1][colNum]);
+                    array.push(boardArray[rowNum][colNum - 2], boardArray[rowNum][colNum - 1], boardArray[rowNum][colNum]);
                 }
             }
         }
@@ -122,38 +205,38 @@ function getAvailDigits(digitsArray, takenSet) {
     return availArray;
 }
 
-function getAvail(board, i, j) {
-    let colArray = getColArray(board, i, j);
-    let rowArray = getRowArray(board, i, j);
-    let squareArray = getSquareArray(board, i, j);
+function getAvail(boardArray, i, j) {
+    let colArray = getColArray(boardArray, i, j);
+    let rowArray = getRowArray(boardArray, i, j);
+    let squareArray = getSquareArray(boardArray, i, j);
     let taken = getTakenDigits(colArray, rowArray, squareArray);
     let digits = digitArray(9);
     return getAvailDigits(digits, taken);
 }
 
-function getStepsForward(board, i, j) {
-    return (board[0].length * (i)) + j;
+function getStepsForward(boardArray, i, j) {
+    return (boardArray[0].length * (i)) + j;
 }
 
 function populateBoardArray() {
-    let board = createEmptyBoardArray();
+    let boardArray = createEmptyBoardArray();
     let stepsBack = 0;
     let maxNum = 0;
-    for (let i = 0; i < board.length; i++) {
-        for (let j = 0; j < board[i].length; j++) {
-            board[i][j] = 0;
+    for (let i = 0; i < boardArray.length; i++) {
+        for (let j = 0; j < boardArray[i].length; j++) {
+            boardArray[i][j] = 0;
 
-            let currentSteps = getStepsForward(board, i, j);
+            let currentSteps = getStepsForward(boardArray, i, j);
             if (currentSteps > maxNum) {
                 maxNum = currentSteps;
                 stepsBack = 0;
             }
 
-            let avail = getAvail(board, i, j);
+            let avail = getAvail(boardArray, i, j);
             let randomAvail = avail[Math.floor(Math.random() * avail.length)];
 
             if (randomAvail) {
-                board[i][j] = randomAvail;
+                boardArray[i][j] = randomAvail;
             } else {
                 stepsBack++;
                 if ((j - stepsBack) < -1) {
@@ -167,29 +250,21 @@ function populateBoardArray() {
             }
         }
     }
-    return board;
+    return boardArray;
 }
-
-// console.time();
-
-// for (let i = 0; i < 100; i++) {
-//     // console.log(i);
-//     // console.log(populateBoardArray());
-//     populateBoardArray()
-// }
-
-// console.timeEnd();
 
 function getRevealNum(difficulty) {
     switch (difficulty) {
         case "easy":
-            return 20;
+            return 36;
         case "medium":
-            return 15;
+            return 33;
         case "hard":
-            return 10;
+            return 30;
+        case "expert":
+            return 26;
         default:
-            return 15;
+            return 33;
     }
 }
 
@@ -218,14 +293,30 @@ function getShown(board, boolean = true) {
         board[i].forEach(element => {
             if (element.shown === boolean) {
                 shownRow.push(element.number);
-                // return element.number;
             } else {
                 shownRow.push(0);
-                // return 0;
             }
         })
-
         shown.push(shownRow)
     }
     return shown;
+}
+
+function isCorrect(boardArray) {
+    var boolean = true;
+    iLoop:
+    for (let i = 0; i < boardArray.length; i++) {
+        for (let j = 0; j < boardArray[i].length; j++) {
+            let colArray = getColArray(boardArray, 8, j);
+            let rowArray = getRowArray(boardArray, i, 8);
+            let squareArray = getFullSquareArray(boardArray, i, j);
+            let taken = getTakenDigits(colArray, rowArray, squareArray);
+
+            if (taken.size !== 9) {
+                boolean = false;
+                break iLoop;
+            }
+        }
+    }
+    return boolean;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./Square.css";
+import "./Tile.css";
 
-class Square extends Component {
+class Tile extends Component {
 
     handleTopLeft(rowOrCol) {
         switch (rowOrCol) {
@@ -51,14 +51,14 @@ class Square extends Component {
 
         if (this.props.shown) {
             return (
-                <span className={`square ${corners}`} id={this.props.id}>
+                <span className={`tile ${corners}`} id={this.props.id}>
                     {this.props.number}
                 </span>
             )
         }
         else {
             return (
-                <input onChange={this.props.onChange} className={`square ${corners}`} id={this.props.id} rowindex={this.props.rowIndex} colindex={this.props.colIndex} placeholder={this.props.number}>
+                <input onChange={this.props.onChange} className={`tile ${corners}`} id={this.props.id} rowindex={this.props.rowIndex} colindex={this.props.colIndex} placeholder={this.props.number}>
                 </input>
             )
         }
@@ -66,4 +66,4 @@ class Square extends Component {
     }
 }
 
-export default Square;
+export default Tile;

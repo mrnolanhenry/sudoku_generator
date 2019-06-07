@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import * as utils from './utils.js';
-import Square from "./components/Square";
+import Tile from "./components/Tile";
 import Col from "./components/Col";
 import Row from "./components/Row";
 import Header from "./components/Header";
@@ -23,7 +23,7 @@ class App extends React.Component {
       attempt: utils.getShown(newBoard) })
   }
 
-  handleChange = (e) => {
+  handleDifficulty = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -34,7 +34,8 @@ class App extends React.Component {
     let newBoard = utils.createBoard(this.state.difficulty);
     this.setState({
       board: newBoard,
-      attempt: utils.getShown(newBoard)
+      attempt: utils.getShown(newBoard),
+      correct: false
     })
     var puzzleForm = document.getElementById('puzzle');
     puzzleForm.reset();
@@ -42,8 +43,29 @@ class App extends React.Component {
 
   handleAttempt = (e) => {
     e.preventDefault();
-    // TODO: check if this.state.attempt is valid board
+    if (utils.isCorrect(this.state.attempt)) {
+      this.setState({
+        correct: true
+      })
+      console.log('correct!')
+    }
+    else {
+      console.log('incorrect!')
+    }
+  }
 
+  showSolved = () => {
+    let shownBoard = [];
+    this.state.board.forEach(row => {
+      let shownRow = [];
+      row.forEach(tile => {
+          shownRow.push({number: tile.number, shown: true})
+        })
+      shownBoard.push(shownRow);
+    })
+    this.setState({
+      board: shownBoard
+    })
   }
 
   handleFill = (e) => {
@@ -51,19 +73,18 @@ class App extends React.Component {
     let rowIndex = e.target.getAttribute('rowindex');
     let colIndex = e.target.getAttribute('colindex');
     currentFill[rowIndex][colIndex] = parseInt(e.target.value);
-    console.log(currentFill)
     this.setState({
       attempt: currentFill
     });
   }
 
   render() {
-    var mapSquares = [];
+    var mapTiles = [];
     if (this.state.board.length > 0) {
-      mapSquares = this.state.board.map((row, rowIndex) => {
+      mapTiles = this.state.board.map((row, rowIndex) => {
         return <Row center puzzle key={rowIndex}>
-          {row.map((square, colIndex) => {
-            return <Square onChange={this.handleFill} rowIndex={rowIndex} colIndex={colIndex} key={`${rowIndex},${colIndex}`} id={`${rowIndex},${colIndex}`} number={square.number} shown={square.shown} />
+          {row.map((tile, colIndex) => {
+            return <Tile onChange={this.handleFill} rowIndex={rowIndex} colIndex={colIndex} key={`${rowIndex},${colIndex}`} id={`${rowIndex},${colIndex}`} number={tile.number} shown={tile.shown} />
           })}
         </Row>
       })
@@ -74,14 +95,14 @@ class App extends React.Component {
         <Header />
         <Row center>
           <Col center>
-            <Puzzle onSubmit={this.handleAttempt}>
-              {mapSquares}
+            <Puzzle onSubmit={this.handleAttempt} onClick={this.showSolved}>
+              {mapTiles}
             </Puzzle>
           </Col>
         </Row>
         <Row center padded>
           <Col center>
-            <NextPuzzle onSubmit={this.handleNextBoard} onChange={this.handleChange} difficulty={this.state.difficulty} />
+            <NextPuzzle onSubmit={this.handleNextBoard} onChange={this.handleDifficulty} difficulty={this.state.difficulty} />
           </Col>
         </Row>
 

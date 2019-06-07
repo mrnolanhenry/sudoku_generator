@@ -16,6 +16,14 @@ class Puzzle extends Component {
                     name="action">
                     Submit
                 </button>
+
+                <button
+                    className="btn-show-solved"
+                    type="button"
+                    onClick = {this.props.onClick}
+                    name="action">
+                    Show Solved
+                </button>
                 </Row>
             </form>
             

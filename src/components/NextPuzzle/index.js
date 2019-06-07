@@ -15,6 +15,7 @@ class NextPuzzle extends Component {
                     <option>easy</option>
                     <option>medium</option>
                     <option>hard</option>
+                    <option>expert</option>
                 </select>
 
                 <button

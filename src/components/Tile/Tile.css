@@ -1,4 +1,4 @@
-.square {
+.tile {
     display: flex;
     width: 50px;
     height: 50px;
@@ -11,27 +11,35 @@
     box-sizing: border-box;
 }
 
-span.square {
-    font-weight: bold;
+input.tile {
+    font-style: oblique;
+    font-family: cursive;
+    font-size: 1.5rem;
+    color: rgb(0, 89, 255);
 }
 
-.square.top {
+span.tile {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.tile.top {
     border-top: 2px black solid;
 }
 
-.square.bottom {
+.tile.bottom {
     border-bottom: 2px black solid;
 }
 
-.square.right {
+.tile.right {
     border-right: 2px black solid;
 }
 
-.square.left {
+.tile.left {
     border-left: 2px black solid;
 }
 
-.square:focus {
+.tile:focus {
     outline: none;
     box-shadow: 2px 2px 2px 2px grey inset;
     transition: .2s;
