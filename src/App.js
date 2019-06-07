@@ -13,6 +13,7 @@ class App extends React.Component {
   state = {
     board: [],
     attempt: [],
+    prevAttempt: [],
     correct: false,
     difficulty: "medium",
     message: "",
@@ -21,9 +22,10 @@ class App extends React.Component {
 
   componentDidMount = () => {
     let newBoard = utils.createBoard()
+    let newAttempt = utils.getShown(newBoard)
     this.setState({ 
       board: newBoard,
-      attempt: utils.getShown(newBoard) })
+      attempt: newAttempt})
   }
 
   handleDifficulty = (e) => {
@@ -35,9 +37,10 @@ class App extends React.Component {
   handleNextBoard = (e) => {
     e.preventDefault();
     let newBoard = utils.createBoard(this.state.difficulty);
+    let newAttempt = utils.getShown(newBoard)
     this.setState({
       board: newBoard,
-      attempt: utils.getShown(newBoard),
+      attempt: newAttempt,
       message: "",
       correct: false
     })
@@ -47,12 +50,19 @@ class App extends React.Component {
 
   handleAttempt = (e) => {
     e.preventDefault();
-    if (utils.isCorrect(this.state.attempt)) {
+    let newAttempt = this.state.attempt;
+    if (utils.isCorrect(newAttempt) && this.state.prevAttempt !== newAttempt) {
       let prevCount = this.state.count
       this.setState({
         correct: true,
         message: "Correct!",
+        prevAttempt: newAttempt,
         count: prevCount + 1
+      })
+    }
+    else if (utils.isCorrect(newAttempt)) {
+      this.setState({
+        message: "Try a new puzzle!"
       })
     }
     else {
