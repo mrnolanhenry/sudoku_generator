@@ -218,8 +218,9 @@ function getStepsForward(boardArray, i, j) {
     return (boardArray[0].length * (i)) + j;
 }
 
-export function populateBoardArray() {
-    let boardArray = createEmptyBoardArray();
+// generate a simple array of a solved sudoku puzzle
+// by default, starts with a simple empty board array
+export function populateBoardArray(boardArray = createEmptyBoardArray()) {
     let stepsBack = 0;
     let maxNum = 0;
     for (let i = 0; i < boardArray.length; i++) {
@@ -253,7 +254,8 @@ export function populateBoardArray() {
     return boardArray;
 }
 
-function getRevealNum(difficulty) {
+// return a rough amount of tiles to show based on difficulty
+function getShowNum(difficulty) {
     switch (difficulty) {
         case "beginner":
             return 45;
@@ -270,16 +272,17 @@ function getRevealNum(difficulty) {
     }
 }
 
+// create a board (array of objects) based on simple board array and set shown property based on difficulty
 export function createBoard(difficulty) {
     let boardArray = populateBoardArray();
     let board = [];
-    let revealNum = getRevealNum(difficulty);
+    let showNum = getShowNum(difficulty);
     boardArray.forEach(row => {
         let rowObjArray = [];
         row.forEach(element => {
             let obj = {
                 number: element,
-                shown: Math.floor(Math.random() * boardArray.length * boardArray.length) <= revealNum
+                shown: Math.floor(Math.random() * boardArray.length * boardArray.length) <= showNum
             }
             rowObjArray.push(obj);
         })
@@ -288,6 +291,8 @@ export function createBoard(difficulty) {
     return board;
 }
 
+// gets simple array of numbers (0 if not shown, otherwise the tile number) from a board's array of objects
+// get tiles Not shown by setting optional 2nd argument to false
 export function getShown(board, boolean = true) {
     let shown = [];
     for (let i = 0; i < board.length; i++) {
@@ -304,6 +309,7 @@ export function getShown(board, boolean = true) {
     return shown;
 }
 
+// using simple board array (no objects) check whether a solution is correct/valid.
 export function isCorrect(boardArray) {
     var boolean = true;
     iLoop:

@@ -13,11 +13,11 @@ class App extends React.Component {
   state = {
     board: [],
     attempt: [],
-    prevAttempt: [],
     correct: false,
     difficulty: "medium",
     message: "",
-    count: 0
+    count: 0,
+    solverMode: false
   }
 
   componentDidMount = () => {
@@ -51,12 +51,11 @@ class App extends React.Component {
   handleAttempt = (e) => {
     e.preventDefault();
     let newAttempt = this.state.attempt;
-    if (utils.isCorrect(newAttempt) && this.state.prevAttempt !== newAttempt) {
+    if (utils.isCorrect(newAttempt) && !(this.state.correct)) {
       let prevCount = this.state.count
       this.setState({
         correct: true,
         message: "Correct!",
-        prevAttempt: newAttempt,
         count: prevCount + 1
       })
     }
