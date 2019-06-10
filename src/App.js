@@ -92,7 +92,6 @@ class App extends React.Component {
     let colIndex = e.target.getAttribute('colindex');
     let val = e.target.value.replace(/\s/g, '')
     currentFill[rowIndex][colIndex] = parseInt(val);
-    console.log(currentFill[rowIndex][colIndex])
     this.setState({
       attempt: currentFill
     });
