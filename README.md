@@ -27,6 +27,7 @@ $ npm start
 
 ## Built With
 * [Node](https://nodejs.org/en/) - Back-End JS
+* [Bootstrap](https://getbootstrap.com/) - Front-End Library
 * [React](https://reactjs.org/) - Front-End
 
 ## Planned Updates
