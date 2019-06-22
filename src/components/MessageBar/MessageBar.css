@@ -6,7 +6,3 @@ h5, h6 {
     font-style: oblique;
     color: rgb(0, 89, 255);
 }
-
-.row {
-    min-height: 42px;
-}

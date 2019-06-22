@@ -44,3 +44,10 @@ span.tile {
     box-shadow: 2px 2px 2px 2px grey inset;
     transition: .2s;
 }
+
+@media screen and (max-width: 560px) {
+    .tile {
+        width: 30px;
+        height: 30px;
+    }
+}
