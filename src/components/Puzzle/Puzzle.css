@@ -1,7 +1,6 @@
 button {
     background-color: white;
     margin: 0px 10px 0px 10px;
-    font-family: cursive;
     box-shadow: 2px 4px 4px 0px grey;
     opacity: .75;
     transition: .2s;

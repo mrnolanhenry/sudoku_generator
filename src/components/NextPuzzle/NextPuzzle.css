@@ -3,11 +3,6 @@
     color: black;
     box-shadow: 2px 4px 4px 0px grey;
     margin: 0px 10px 0px 10px;
-    font-family: cursive;
-}
-
-select {
-    font-family: cursive;
 }
 
 .btn-next-puzzle:focus {
