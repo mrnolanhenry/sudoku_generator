@@ -6,7 +6,9 @@ import Col from "./components/Col";
 import Row from "./components/Row";
 import Header from "./components/Header";
 import MessageBar from "./components/MessageBar";
-import NextPuzzle from "./components/NextPuzzle";
+import Button from "./components/Button";
+import Form from "./components/Form";
+import Select from "./components/Select";
 import Puzzle from "./components/Puzzle";
 
 class App extends React.Component {
@@ -23,12 +25,15 @@ class App extends React.Component {
   componentDidMount = () => {
     let newBoard = utils.createBoard()
     let newAttempt = utils.getShown(newBoard)
-    this.setState({ 
+    this.setState({
       board: newBoard,
-      attempt: newAttempt})
+      attempt: newAttempt
+    })
   }
 
   handleDifficulty = (e) => {
+    // console.log('fire handleDifficulty')
+    // FIRES
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -36,6 +41,8 @@ class App extends React.Component {
 
   handleNextBoard = (e) => {
     e.preventDefault();
+    // console.log('fire handleNextBoard')
+    // FIRES
     let newBoard = utils.createBoard(this.state.difficulty);
     let newAttempt = utils.getShown(newBoard)
     this.setState({
@@ -45,11 +52,14 @@ class App extends React.Component {
       correct: false
     })
     var puzzleForm = document.getElementById('puzzle');
-    puzzleForm.reset();
+    console.log(puzzleForm);
+    // puzzleForm.reset();
   };
 
   handleAttempt = (e) => {
     e.preventDefault();
+    // console.log('fire handleAttempt')
+    //  FIRES
     let newAttempt = this.state.attempt;
     if (utils.isCorrect(newAttempt) && !(this.state.correct)) {
       let prevCount = this.state.count
@@ -76,8 +86,8 @@ class App extends React.Component {
     this.state.board.forEach(row => {
       let shownRow = [];
       row.forEach(tile => {
-          shownRow.push({number: tile.number, shown: true})
-        })
+        shownRow.push({ number: tile.number, shown: true })
+      })
       shownBoard.push(shownRow);
     })
     this.setState({
@@ -114,14 +124,40 @@ class App extends React.Component {
         <MessageBar message={this.state.message} count={this.state.count} />
         <Row center marginTop>
           <Col center>
-            <Puzzle onSubmit={this.handleAttempt} onClick={this.showSolved}>
+            <Puzzle>
               {mapTiles}
             </Puzzle>
           </Col>
         </Row>
         <Row center marginTop>
           <Col center>
-            <NextPuzzle onSubmit={this.handleNextBoard} onChange={this.handleDifficulty} difficulty={this.state.difficulty} />
+            <Form onSubmit={this.handleAttempt}>
+              <Button className="btn-submit-puzzle" type="submit" name="action">
+                Submit
+              </Button>
+              <Button className="btn-show-solved" type="button" onClick={this.showSolved} name="action">
+                Show Solved
+              </Button>
+            </Form>
+            <div className="input-field">
+              <Form onSubmit={this.handleNextBoard}>
+                <Select
+                  onChange={this.handleDifficulty}
+                  name='difficulty'
+                  defaultValue={this.state.difficulty}>
+                  <option value="medium" disabled className="text-hide">Select difficulty</option>
+                  <option>beginner</option>
+                  <option>easy</option>
+                  <option>medium</option>
+                  <option>hard</option>
+                  <option>expert</option>
+                </Select>
+
+                <Button className="btn-next-puzzle" type="submit" name="action">
+                  New Puzzle
+                </Button>
+              </Form>
+            </div>
           </Col>
         </Row>
 
