@@ -9,7 +9,7 @@ class Puzzle extends Component {
         return (
             <form id="puzzle" onSubmit={this.props.onSubmit}>
                 {this.props.children}
-                <Row center padded>
+                <Row center marginTop>
                 <button
                     className="btn-submit-puzzle"
                     type="submit"

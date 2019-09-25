@@ -1,7 +1,7 @@
 button {
     background-color: white;
     margin: 0px 10px 0px 10px;
-    box-shadow: 2px 4px 4px 0px grey;
+    box-shadow: 2px 4px 4px 0px rgb(30, 30, 30);
     opacity: .75;
     transition: .2s;
     cursor: pointer;
@@ -24,11 +24,11 @@ button:active {
 button:hover {opacity: 1}
 
 button:active {
-    box-shadow: 0 2px grey;
+    box-shadow: 0 2px rgb(30, 30, 30);
     transform: translateY(2px);
 }
 
 .btn-show-solved {
-    background-color: rgb(0, 89, 255);
+    background-color: rgb(42, 116, 255);
     color: white;
 }

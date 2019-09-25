@@ -3,8 +3,8 @@
     text-align: center;
 }
 
-.row-padded {
-    padding-top: 10px;
+.row-margin-top {
+    margin-top: 10px;
 }
 
 .row-message {

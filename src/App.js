@@ -112,14 +112,14 @@ class App extends React.Component {
       <div className="container-fluid">
         <Header />
         <MessageBar message={this.state.message} count={this.state.count} />
-        <Row center padded>
+        <Row center marginTop>
           <Col center>
             <Puzzle onSubmit={this.handleAttempt} onClick={this.showSolved}>
               {mapTiles}
             </Puzzle>
           </Col>
         </Row>
-        <Row center padded>
+        <Row center marginTop>
           <Col center>
             <NextPuzzle onSubmit={this.handleNextBoard} onChange={this.handleDifficulty} difficulty={this.state.difficulty} />
           </Col>

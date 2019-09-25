@@ -58,8 +58,6 @@ class Tile extends Component {
         }
         else {
             return (
-                // <input onChange={this.props.onChange} className={`tile ${corners}`} id={this.props.id} rowindex={this.props.rowIndex} colindex={this.props.colIndex} placeholder={this.props.number}>
-                // </input>
                 <input onChange={this.props.onChange} className={`tile ${corners}`} id={this.props.id} rowindex={this.props.rowIndex} colindex={this.props.colIndex}>
                 </input>
             )
