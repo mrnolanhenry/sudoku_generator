@@ -9,7 +9,7 @@ import MessageBar from "./components/MessageBar";
 import Button from "./components/Button";
 import Form from "./components/Form";
 import Select from "./components/Select";
-import Puzzle from "./components/Puzzle";
+import Option from "./components/Option";
 
 class App extends React.Component {
   state = {
@@ -32,8 +32,6 @@ class App extends React.Component {
   }
 
   handleDifficulty = (e) => {
-    // console.log('fire handleDifficulty')
-    // FIRES
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -41,8 +39,6 @@ class App extends React.Component {
 
   handleNextBoard = (e) => {
     e.preventDefault();
-    // console.log('fire handleNextBoard')
-    // FIRES
     let newBoard = utils.createBoard(this.state.difficulty);
     let newAttempt = utils.getShown(newBoard)
     this.setState({
@@ -52,14 +48,11 @@ class App extends React.Component {
       correct: false
     })
     var puzzleForm = document.getElementById('puzzle');
-    console.log(puzzleForm);
-    // puzzleForm.reset();
+    puzzleForm.reset();
   };
 
   handleAttempt = (e) => {
     e.preventDefault();
-    // console.log('fire handleAttempt')
-    //  FIRES
     let newAttempt = this.state.attempt;
     if (utils.isCorrect(newAttempt) && !(this.state.correct)) {
       let prevCount = this.state.count
@@ -108,7 +101,7 @@ class App extends React.Component {
 
   render() {
     var mapTiles = [];
-    if (this.state.board.length > 0) {
+    if (this.state.board.length) {
       mapTiles = this.state.board.map((row, rowIndex) => {
         return <Row center puzzle key={rowIndex}>
           {row.map((tile, colIndex) => {
@@ -124,43 +117,39 @@ class App extends React.Component {
         <MessageBar message={this.state.message} count={this.state.count} />
         <Row center marginTop>
           <Col center>
-            <Puzzle>
+            <Form id="puzzle" onSubmit={this.handleAttempt}>
               {mapTiles}
-            </Puzzle>
-          </Col>
-        </Row>
-        <Row center marginTop>
-          <Col center>
-            <Form onSubmit={this.handleAttempt}>
-              <Button className="btn-submit-puzzle" type="submit" name="action">
-                Submit
+              <Row center marginTop>
+                <Button className="btn-submit-puzzle" type="submit" name="action">
+                  Submit
               </Button>
-              <Button className="btn-show-solved" type="button" onClick={this.showSolved} name="action">
-                Show Solved
+                <Button className="btn-show-solved" type="button" onClick={this.showSolved} name="action">
+                  Show Solved
               </Button>
+              </Row>
             </Form>
-            <div className="input-field">
-              <Form onSubmit={this.handleNextBoard}>
+
+            <Form onSubmit={this.handleNextBoard}>
+              <Row center marginTop>
                 <Select
                   onChange={this.handleDifficulty}
                   name='difficulty'
                   defaultValue={this.state.difficulty}>
-                  <option value="medium" disabled className="text-hide">Select difficulty</option>
-                  <option>beginner</option>
-                  <option>easy</option>
-                  <option>medium</option>
-                  <option>hard</option>
-                  <option>expert</option>
+                  <Option value={this.state.difficulty} disabled className="text-hide">Select difficulty</Option>
+                  <Option>beginner</Option>
+                  <Option>easy</Option>
+                  <Option>medium</Option>
+                  <Option>hard</Option>
+                  <Option>expert</Option>
                 </Select>
 
                 <Button className="btn-next-puzzle" type="submit" name="action">
                   New Puzzle
                 </Button>
-              </Form>
-            </div>
+              </Row>
+            </Form>
           </Col>
         </Row>
-
       </div>
     );
   }

@@ -275,6 +275,7 @@ function getShowNum(difficulty) {
 // create a board (array of objects) based on simple board array and set shown property based on difficulty
 export function createBoard(difficulty) {
     let boardArray = populateBoardArray();
+    console.log(boardArray);
     let board = [];
     let showNum = getShowNum(difficulty);
     boardArray.forEach(row => {

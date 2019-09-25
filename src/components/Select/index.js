@@ -9,12 +9,7 @@ class Select extends Component {
                 onChange={this.props.onChange}
                 name= {this.props.name}
                 defaultValue={this.props.defaultValue}>
-                <option value={this.props.defaultValue} disabled className={this.props.className}>Select difficulty</option>
-                <option>beginner</option>
-                <option>easy</option>
-                <option>medium</option>
-                <option>hard</option>
-                <option>expert</option>
+                    {this.props.children}
             </select>
         )
     }
