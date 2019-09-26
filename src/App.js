@@ -8,8 +8,6 @@ import Header from "./components/Header";
 import MessageBar from "./components/MessageBar";
 import Button from "./components/Button";
 import Form from "./components/Form";
-import Select from "./components/Select";
-import Option from "./components/Option";
 
 class App extends React.Component {
   state = {
@@ -131,17 +129,17 @@ class App extends React.Component {
 
             <Form onSubmit={this.handleNextBoard}>
               <Row center marginTop>
-                <Select
+                <select
                   onChange={this.handleDifficulty}
                   name='difficulty'
                   defaultValue={this.state.difficulty}>
-                  <Option value={this.state.difficulty} disabled className="text-hide">Select difficulty</Option>
-                  <Option>beginner</Option>
-                  <Option>easy</Option>
-                  <Option>medium</Option>
-                  <Option>hard</Option>
-                  <Option>expert</Option>
-                </Select>
+                  <option value={this.state.difficulty} disabled className="text-hide">Select difficulty</option>
+                  <option>beginner</option>
+                  <option>easy</option>
+                  <option>medium</option>
+                  <option>hard</option>
+                  <option>expert</option>
+                </select>
 
                 <Button className="btn-next-puzzle" type="submit" name="action">
                   New Puzzle
