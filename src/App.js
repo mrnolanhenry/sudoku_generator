@@ -6,8 +6,7 @@ import Col from "./components/Col";
 import Row from "./components/Row";
 import Header from "./components/Header";
 import MessageBar from "./components/MessageBar";
-import Button from "./components/Button";
-import Form from "./components/Form";
+import ButtonBar from "./components/ButtonBar";
 
 class App extends React.Component {
   state = {
@@ -45,8 +44,6 @@ class App extends React.Component {
       message: "",
       correct: false
     })
-    var puzzleForm = document.getElementById('puzzle');
-    puzzleForm.reset();
   };
 
   handleAttempt = (e) => {
@@ -115,37 +112,8 @@ class App extends React.Component {
         <MessageBar message={this.state.message} count={this.state.count} />
         <Row center marginTop>
           <Col center>
-            <Form id="puzzle" onSubmit={this.handleAttempt}>
               {mapTiles}
-              <Row center marginTop>
-                <Button className="btn-submit-puzzle" type="submit" name="action">
-                  Submit
-              </Button>
-                <Button className="btn-show-solved" type="button" onClick={this.showSolved} name="action">
-                  Show Solved
-              </Button>
-              </Row>
-            </Form>
-
-            <Form onSubmit={this.handleNextBoard}>
-              <Row center marginTop>
-                <select
-                  onChange={this.handleDifficulty}
-                  name='difficulty'
-                  defaultValue={this.state.difficulty}>
-                  <option value={this.state.difficulty} disabled className="text-hide">Select difficulty</option>
-                  <option>beginner</option>
-                  <option>easy</option>
-                  <option>medium</option>
-                  <option>hard</option>
-                  <option>expert</option>
-                </select>
-
-                <Button className="btn-next-puzzle" type="submit" name="action">
-                  New Puzzle
-                </Button>
-              </Row>
-            </Form>
+              <ButtonBar handleAttempt ={this.handleAttempt} showSolved={this.showSolved} handleDifficulty={this.handleDifficulty} difficulty={this.state.difficulty} handleNextBoard={this.handleNextBoard} />
           </Col>
         </Row>
       </div>
