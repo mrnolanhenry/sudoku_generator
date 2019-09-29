@@ -34,6 +34,8 @@ $ npm start
 * Sudoku Solver - add feature for users to enter their own puzzles on a blank sudoku board and receive a solution to their custom puzzle.
 * Select Difficulty - improve on this feature by creating an algorithm that measures puzzle difficulty by additional factors besides total amount of shown numbers
 
+* Killer Sudoku! - add feature to solve "Killer Sudoku"-style puzzles for another level of difficulty.
+
 * Refactor - avoid or minimize using utils.js
 
 * Team Sudoku! - add option to work collectively with anyone on a daily puzzle
